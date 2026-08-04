@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilla Azul · Sección 149</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    background: radial-gradient(circle at 50% 0%, #0c1830 0%, #05070c 60%);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:44px 20px 60px;
+    font-family:'Work Sans', sans-serif;
+    color:#dfeaf7;
+  }
+
+  /* ===== Encabezado ===== */
+  header{
+    text-align:center;
+    margin-bottom:8px;
+  }
+
+  .kicker{
+    font-size:0.7rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#4a6a90;
+    margin-bottom:12px;
+  }
+
+  h1{
+    font-size:1.9rem;
+    font-weight:700;
+    letter-spacing:0.3px;
+    color:#eaf2fb;
+  }
+
+  h1 span{
+    display:block;
+    font-size:1.05rem;
+    font-weight:500;
+    color:#5b9ede;
+    letter-spacing:2.5px;
+    margin-top:6px;
+  }
+
+  .subrayado{
+    width:64px;
+    height:2px;
+    background:linear-gradient(90deg, transparent, #4f8ac4, transparent);
+    margin:26px auto 46px;
+  }
+
+  /* ===== Cadena de engranajes ===== */
+  .cadena{
+    width:100%;
+    max-width:760px;
+    position:relative;
+  }
+
+  /* línea vertical que atraviesa toda la cadena, detrás de los engranes */
+  .cadena::before{
+    content:'';
+    position:absolute;
+    left:65px;
+    top:60px;
+    bottom:60px;
+    width:2px;
+    background:linear-gradient(180deg,
+      rgba(79,138,196,0) 0%,
+      rgba(79,138,196,0.5) 8%,
+      rgba(79,138,196,0.5) 92%,
+      rgba(79,138,196,0) 100%);
+    z-index:0;
+  }
+
+  .fila{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:26px;
+    padding:22px 0;
+    z-index:1;
+  }
+
+  /* conector con mini engrane girando en sentido opuesto, entre cada fila */
+  .conector{
+    position:relative;
+    height:38px;
+    display:flex;
+    align-items:center;
+    padding-left:65px;
+    margin-left:0;
+    z-index:1;
+  }
+
+  .conector .mini-gear{
+    width:30px;
+    height:30px;
+    transform:translateX(-15px);
+    filter: drop-shadow(0 0 8px rgba(60,130,220,0.5));
+    animation: girarInverso 9s linear infinite;
+    opacity:0.85;
+  }
+
+  @keyframes girarInverso{
+    from{ transform:translateX(-15px) rotate(360deg); }
+    to{ transform:translateX(-15px) rotate(0deg); }
+  }
+
+  /* ===== Engrane principal ===== */
+  .gear-slot{
+    position:relative;
+    flex-shrink:0;
+    width:130px;
+    height:130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .gear-slot svg{
+    width:100%;
+    height:100%;
+    animation: girar 26s linear infinite;
+    filter: drop-shadow(0 0 16px rgba(30,110,220,0.45)) drop-shadow(0 0 36px rgba(20,80,180,0.2));
+    transition: filter 0.3s ease;
+  }
+
+  .fila:hover .gear-slot svg{
+    animation-play-state: paused;
+    filter: drop-shadow(0 0 26px rgba(50,140,255,0.7)) drop-shadow(0 0 50px rgba(20,90,200,0.35));
+  }
+
+  @keyframes girar{ to{ transform:rotate(360deg); } }
+
+  .gear-label{
+    margin-top:12px;
+    text-align:center;
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.6px;
+    color:#bcd3ec;
+    line-height:1.3;
+  }
+
+  .col-gear{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:130px;
+    flex-shrink:0;
+  }
+
+  /* ===== Tarjetas de proyectos ===== */
+  .proyectos{
+    flex:1;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    max-width:520px;
+  }
+
+  .card{
+    background: rgba(14, 32, 64, 0.55);
+    border:1px solid rgba(79,138,196,0.28);
+    border-radius:10px;
+    padding:12px 18px;
+    font-size:0.88rem;
+    font-weight:500;
+    color:#dfeaf7;
+    letter-spacing:0.2px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card:hover{
+    border-color:#5b9ede;
+    background: rgba(30,90,180,0.22);
+    transform: translateY(-2px);
+  }
+
+  .card.placeholder{
+    background: rgba(255,255,255,0.02);
+    border:1px dashed rgba(255,255,255,0.15);
+    color: rgba(223,234,247,0.4);
+  }
+
+  .card.placeholder:hover{
+    transform:none;
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* ===== BOTÓN PARA EL VÍNCULO ===== */
+  .pdf-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #5b9ede;
+    border: 1px solid rgba(79, 138, 196, 0.4);
+    padding: 2px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .pdf-link:hover {
+    background: rgba(79, 138, 196, 0.2);
+    color: #ffffff;
+  }
+
+  footer{
+    margin-top:50px;
+    font-size:0.6rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.08);
+  }
+
+  @media (max-width: 640px){
+    .cadena::before{ left:40px; }
+    .fila{ gap:16px; }
+    .conector{ padding-left:40px; }
+    .col-gear{ width:88px; }
+    .gear-slot{ width:88px; height:88px; }
+    h1{ font-size:1.5rem; }
+    .gear-label{ font-size:0.62rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Definición SVG de los engranes ===== -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="diente" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7aaad0" />
+      <stop offset="30%" stop-color="#1c508a" />
+      <stop offset="70%" stop-color="#0a2f62" />
+      <stop offset="100%" stop-color="#040f2e" />
+    </linearGradient>
+    <radialGradient id="cuerpo" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#3a7ab8" />
+      <stop offset="20%" stop-color="#103a80" />
+      <stop offset="50%" stop-color="#071e58" />
+      <stop offset="80%" stop-color="#030f32" />
+      <stop offset="100%" stop-color="#010718" />
+    </radialGradient>
+    <linearGradient id="anillo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a90c8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#020918" stop-opacity="0.4" />
+    </linearGradient>
+    <radialGradient id="nucleo" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#5a9acc" />
+      <stop offset="40%" stop-color="#0f3878" />
+      <stop offset="100%" stop-color="#030e38" />
+    </radialGradient>
+
+    <g id="gearDetallado">
+      <circle cx="50" cy="50" r="30" fill="#020a1e" opacity="0.5" transform="translate(1.2,1.6)" />
+      <circle cx="50" cy="50" r="28" fill="url(#cuerpo)" />
+      <circle cx="50" cy="50" r="28" fill="none" stroke="url(#anillo)" stroke-width="2.2" />
+      <circle cx="50" cy="50" r="26.3" fill="none" stroke="rgba(180,225,255,0.18)" stroke-width="0.8" />
+      <g fill="url(#diente)" stroke="#041530" stroke-width="1.2">
+        <rect x="44" y="6" width="12" height="22" rx="2.5" />
+        <rect x="44" y="72" width="12" height="22" rx="2.5" />
+        <rect x="6" y="44" width="22" height="12" rx="2.5" />
+        <rect x="72" y="44" width="22" height="12" rx="2.5" />
+        <rect x="18" y="16" width="12" height="22" rx="2.5" transform="rotate(45 24 27)" />
+        <rect x="70" y="62" width="12" height="22" rx="2.5" transform="rotate(45 76 73)" />
+        <rect x="18" y="62" width="12" height="22" rx="2.5" transform="rotate(-45 24 73)" />
+        <rect x="70" y="16" width="12" height="22" rx="2.5" transform="rotate(-45 76 27)" />
+      </g>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="url(#anillo)" stroke-width="1" opacity="0.45" />
+      <circle cx="50" cy="50" r="13" fill="#04090f" />
+      <circle cx="50" cy="50" r="13" fill="none" stroke="rgba(30,80,160,0.6)" stroke-width="1.8" />
+      <circle cx="50" cy="50" r="7" fill="url(#nucleo)" />
+      <circle cx="50" cy="50" r="7" fill="none" stroke="rgba(60,130,200,0.45)" stroke-width="1" />
+      <circle cx="47" cy="47" r="2" fill="rgba(120,180,230,0.4)" />
+    </g>
+
+    <g id="gearMini">
+      <circle cx="50" cy="50" r="26" fill="url(#cuerpo)" />
+      <circle cx="50" cy="50" r="26" fill="none" stroke="url(#anillo)" stroke-width="2.5" />
+      <g fill="url(#diente)" stroke="#041530" stroke-width="1.4">
+        <rect x="42" y="4" width="16" height="20" rx="3" />
+        <rect x="42" y="76" width="16" height="20" rx="3" />
+        <rect x="4" y="42" width="20" height="16" rx="3" />
+        <rect x="76" y="42" width="20" height="16" rx="3" />
+        <rect x="16" y="12" width="16" height="20" rx="3" transform="rotate(45 24 22)" />
+        <rect x="68" y="68" width="16" height="20" rx="3" transform="rotate(45 76 78)" />
+        <rect x="16" y="68" width="16" height="20" rx="3" transform="rotate(-45 24 78)" />
+        <rect x="68" y="12" width="16" height="20" rx="3" transform="rotate(-45 76 22)" />
+      </g>
+      <circle cx="50" cy="50" r="11" fill="#04090f" />
+      <circle cx="50" cy="50" r="11" fill="none" stroke="rgba(30,80,160,0.6)" stroke-width="1.6" />
+    </g>
+  </defs>
+</svg>
+
+<header>
+  <div class="kicker">Comité Ejecutivo Seccional</div>
+  <h1>Planilla Azul<span>Proyecto Sección 149 · 2026 – 2032</span></h1>
+</header>
+
+<div class="subrayado"></div>
+
+<div class="cadena" id="cadena">
+  <!-- Las filas y conectores se generan desde JS -->
+</div>
+
+<footer>✦ engranaje 2026</footer>
+
+<script>
+  /* ===== ARRAY CON LA NUEVA REORGANIZACIÓN ===== */
+  const secciones = [
+    {
+      cargo: "Secretaría General",
+      proyectos: [
+        { nombre: "Comunidad SUTERM", pdfUrl: "https://drive.google.com/file/d/12Rus2WrHdwO4dOzwlkAnjkDc3kY7SrdO/view?usp=drivesdk" }
+      ]
+    },
+    {
+      cargo: "Secretaría de Trabajo",
+      proyectos: [
+        { nombre: "2x1 2x2", pdfUrl: "https://drive.google.com/file/d/114QPNWxzzOw3eaSRpNZt5hSXDbT_6Hqi/view?usp=drivesdk" },
+        { nombre: "Bolsa de trabajo" },
+        { nombre: "Cláusula 43" }
+      ]
+    },
+    {
+      cargo: "Secretaría de Previsión Social",
+      proyectos: [
+        { nombre: "Menos es más", pdfUrl: "https://drive.google.com/file/d/1dwIMafbyddhj5JF21d-9rDbKCnMogiHW/view?usp=drivesdk" },
+        { nombre: "Ahora más es menos" }
+      ]
+    },
+    {
+      cargo: "Secretaría de Organización",
+      proyectos: [
+        { nombre: "Planeación de eventos" }
+      ]
+    },
+    {
+      cargo: "Secretaría del Interior",
+      proyectos: [
+        { nombre: "Inducción sobre estatutos" }
+      ]
+    },
+    {
+      cargo: "Secretaría de Finanzas",
+      proyectos: [
+        { nombre: "Gestión de préstamos" },
+        { nombre: "Laptops SUTERM" }
+      ]
+    },
+    {
+      cargo: "Secretaría de Relaciones",
+      proyectos: [
+        { nombre: "Alianzas intersindicales" },
+        { nombre: "Vinculación externa" }
+      ]
+    },
+    {
+      cargo: "Comisión de Justicia",
+      proyectos: [
+        { nombre: "Video grabación de audiencias" }
+      ]
+    }
+  ];
+
+  const cadena = document.getElementById('cadena');
+
+  secciones.forEach((s, i) => {
+    const fila = document.createElement('div');
+    fila.className = 'fila';
+
+    const colGear = document.createElement('div');
+    colGear.className = 'col-gear';
+    colGear.innerHTML = `
+      <div class="gear-slot">
+        <svg viewBox="0 0 100 100"><use href="#gearDetallado"/></svg>
+      </div>
+      <div class="gear-label">${s.cargo}</div>
+    `;
+
+    const proyectos = document.createElement('div');
+    proyectos.className = 'proyectos';
+    proyectos.innerHTML = s.proyectos.map(p => {
+      /* Solo genera el botón si existe la propiedad pdfUrl */
+      const linkHtml = p.pdfUrl ? `<a href="${p.pdfUrl}" target="_blank" class="pdf-link">📄 Documento</a>` : '';
+      
+      return `
+        <div class="card">
+          ${p.nombre}
+          ${linkHtml}
+        </div>
+      `;
+    }).join('');
+
+    fila.appendChild(colGear);
+    fila.appendChild(proyectos);
+    cadena.appendChild(fila);
+
+    if (i < secciones.length - 1){
+      const conector = document.createElement('div');
+      conector.className = 'conector';
+      conector.innerHTML = `<svg class="mini-gear" viewBox="0 0 100 100"><use href="#gearMini"/></svg>`;
+      cadena.appendChild(conector);
+    }
+  });
+</script>
+
+</body>
+</html>
