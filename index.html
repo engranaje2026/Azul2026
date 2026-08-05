@@ -22,214 +22,62 @@
   }
 
   /* ===== Encabezado ===== */
-  header{
-    text-align:center;
-    margin-bottom:8px;
-  }
-
-  .kicker{
-    font-size:0.7rem;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#4a6a90;
-    margin-bottom:12px;
-  }
-
-  h1{
-    font-size:1.9rem;
-    font-weight:700;
-    letter-spacing:0.3px;
-    color:#eaf2fb;
-  }
-
-  h1 span{
-    display:block;
-    font-size:1.05rem;
-    font-weight:500;
-    color:#5b9ede;
-    letter-spacing:2.5px;
-    margin-top:6px;
-  }
-
-  .subrayado{
-    width:64px;
-    height:2px;
-    background:linear-gradient(90deg, transparent, #4f8ac4, transparent);
-    margin:26px auto 46px;
-  }
+  header{ text-align:center; margin-bottom:8px; }
+  .kicker{ font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#4a6a90; margin-bottom:12px; }
+  h1{ font-size:1.9rem; font-weight:700; letter-spacing:0.3px; color:#eaf2fb; }
+  h1 span{ display:block; font-size:1.05rem; font-weight:500; color:#5b9ede; letter-spacing:2.5px; margin-top:6px; }
+  .subrayado{ width:64px; height:2px; background:linear-gradient(90deg, transparent, #4f8ac4, transparent); margin:26px auto 46px; }
 
   /* ===== Cadena de engranajes ===== */
-  .cadena{
-    width:100%;
-    max-width:760px;
-    position:relative;
-  }
-
-  /* línea vertical que atraviesa toda la cadena, detrás de los engranes */
+  .cadena{ width:100%; max-width:760px; position:relative; }
   .cadena::before{
-    content:'';
-    position:absolute;
-    left:65px;
-    top:60px;
-    bottom:60px;
-    width:2px;
-    background:linear-gradient(180deg,
-      rgba(79,138,196,0) 0%,
-      rgba(79,138,196,0.5) 8%,
-      rgba(79,138,196,0.5) 92%,
-      rgba(79,138,196,0) 100%);
+    content:''; position:absolute;
+    left:72px; /* Ajustado para que la línea siga centrada con el nuevo ancho de 145px */
+    top:60px; bottom:60px; width:2px;
+    background:linear-gradient(180deg, rgba(79,138,196,0) 0%, rgba(79,138,196,0.5) 8%, rgba(79,138,196,0.5) 92%, rgba(79,138,196,0) 100%);
     z-index:0;
   }
 
-  .fila{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:26px;
-    padding:22px 0;
-    z-index:1;
-  }
+  .fila{ position:relative; display:flex; align-items:center; gap:26px; padding:22px 0; z-index:1; }
 
-  /* conector con mini engrane girando en sentido opuesto, entre cada fila */
-  .conector{
-    position:relative;
-    height:38px;
-    display:flex;
-    align-items:center;
-    padding-left:65px;
-    margin-left:0;
-    z-index:1;
-  }
-
-  .conector .mini-gear{
-    width:30px;
-    height:30px;
-    transform:translateX(-15px);
-    filter: drop-shadow(0 0 8px rgba(60,130,220,0.5));
-    animation: girarInverso 9s linear infinite;
-    opacity:0.85;
-  }
-
-  @keyframes girarInverso{
-    from{ transform:translateX(-15px) rotate(360deg); }
-    to{ transform:translateX(-15px) rotate(0deg); }
-  }
+  /* conector */
+  .conector{ position:relative; height:38px; display:flex; align-items:center; padding-left:72px; z-index:1; }
+  .conector .mini-gear{ width:30px; height:30px; transform:translateX(-15px); filter: drop-shadow(0 0 8px rgba(60,130,220,0.5)); animation: girarInverso 9s linear infinite; opacity:0.85; }
+  @keyframes girarInverso{ from{ transform:translateX(-15px) rotate(360deg); } to{ transform:translateX(-15px) rotate(0deg); } }
 
   /* ===== Engrane principal ===== */
-  .gear-slot{
-    position:relative;
-    flex-shrink:0;
-    width:130px;
-    height:130px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .gear-slot svg{
-    width:100%;
-    height:100%;
-    animation: girar 26s linear infinite;
-    filter: drop-shadow(0 0 16px rgba(30,110,220,0.45)) drop-shadow(0 0 36px rgba(20,80,180,0.2));
-    transition: filter 0.3s ease;
-  }
-
-  .fila:hover .gear-slot svg{
-    animation-play-state: paused;
-    filter: drop-shadow(0 0 26px rgba(50,140,255,0.7)) drop-shadow(0 0 50px rgba(20,90,200,0.35));
-  }
-
+  .gear-slot{ position:relative; flex-shrink:0; width:145px; height:130px; display:flex; align-items:center; justify-content:center; }
+  .gear-slot svg{ width:100%; height:100%; animation: girar 26s linear infinite; filter: drop-shadow(0 0 16px rgba(30,110,220,0.45)) drop-shadow(0 0 36px rgba(20,80,180,0.2)); transition: filter 0.3s ease; }
+  .fila:hover .gear-slot svg{ animation-play-state: paused; filter: drop-shadow(0 0 26px rgba(50,140,255,0.7)) drop-shadow(0 0 50px rgba(20,90,200,0.35)); }
   @keyframes girar{ to{ transform:rotate(360deg); } }
 
-  /* ===== Nombres de las Secretarías (MÁS GRANDES) ===== */
+  /* ===== Nombres de las Secretarías (TAMAÑO AUMENTADO) ===== */
   .gear-label{
     margin-top:10px;
     text-align:center;
-    font-size:0.9rem; /* Aumentado para mejor legibilidad */
+    font-size:1.2rem; 
     font-weight:600;
     letter-spacing:0.5px;
     color:#bcd3ec;
     line-height:1.2;
     width:100%;
+    word-wrap: break-word; /* Evita que el texto se salga del contenedor */
   }
 
-  .col-gear{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:130px;
-    flex-shrink:0;
-  }
+  .col-gear{ display:flex; flex-direction:column; align-items:center; width:145px; flex-shrink:0; }
 
   /* ===== Tarjetas de proyectos ===== */
-  .proyectos{
-    flex:1;
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    max-width:520px;
-  }
-
-  .card{
-    background: rgba(14, 32, 64, 0.55);
-    border:1px solid rgba(79,138,196,0.28);
-    border-radius:10px;
-    padding:12px 18px;
-    font-size:0.88rem;
-    font-weight:500;
-    color:#dfeaf7;
-    letter-spacing:0.2px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card:hover{
-    border-color:#5b9ede;
-    background: rgba(30,90,180,0.22);
-    transform: translateY(-2px);
-  }
-
-  .card.placeholder{
-    background: rgba(255,255,255,0.02);
-    border:1px dashed rgba(255,255,255,0.15);
-    color: rgba(223,234,247,0.4);
-  }
-
-  .card.placeholder:hover{
-    transform:none;
-    border-color: rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.02);
-  }
+  .proyectos{ flex:1; display:flex; flex-wrap:wrap; gap:12px; max-width:520px; }
+  .card{ background: rgba(14, 32, 64, 0.55); border:1px solid rgba(79,138,196,0.28); border-radius:10px; padding:12px 18px; font-size:0.88rem; font-weight:500; color:#dfeaf7; letter-spacing:0.2px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease; display: flex; flex-direction: column; align-items: center; }
+  .card:hover{ border-color:#5b9ede; background: rgba(30,90,180,0.22); transform: translateY(-2px); }
+  .card.placeholder{ background: rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.15); color: rgba(223,234,247,0.4); }
+  .card.placeholder:hover{ transform:none; border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); }
 
   /* ===== BOTÓN PARA EL VÍNCULO ===== */
-  .pdf-link {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: #5b9ede;
-    border: 1px solid rgba(79, 138, 196, 0.4);
-    padding: 2px 12px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
+  .pdf-link { display: inline-block; margin-top: 8px; font-size: 0.65rem; font-weight: 600; color: #5b9ede; border: 1px solid rgba(79, 138, 196, 0.4); padding: 2px 12px; border-radius: 20px; text-decoration: none; transition: background 0.2s ease, color 0.2s ease; }
+  .pdf-link:hover { background: rgba(79, 138, 196, 0.2); color: #ffffff; }
 
-  .pdf-link:hover {
-    background: rgba(79, 138, 196, 0.2);
-    color: #ffffff;
-  }
-
-  footer{
-    margin-top:50px;
-    font-size:0.6rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,0.08);
-  }
+  footer{ margin-top:50px; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.08); }
 
   @media (max-width: 640px){
     .cadena::before{ left:40px; }
@@ -238,13 +86,13 @@
     .col-gear{ width:88px; }
     .gear-slot{ width:88px; height:88px; }
     h1{ font-size:1.5rem; }
-    .gear-label{ font-size:0.75rem; /* Más grande también en móvil */ }
+    .gear-label{ font-size:1rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- ===== Definición SVG de los engranes (rediseño tipo icono plano, muchos dientes finos, hueco abierto) ===== -->
+<!-- ===== SVG de los engranes ===== -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <linearGradient id="diente" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -258,11 +106,8 @@
       <stop offset="100%" stop-color="#173d73" />
     </linearGradient>
 
-    <!-- Engrane principal: anillo plano, 20 dientes finos, hueco abierto -->
     <g id="gearDetallado">
-      <!-- cuerpo: anillo sólido entre r=28 y r=35 -->
       <circle cx="50" cy="50" r="31.5" fill="none" stroke="url(#cuerpo)" stroke-width="7" />
-      <!-- 20 dientes finos -->
       <g fill="url(#diente)">
         <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" />
         <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(18 50 50)" />
@@ -285,13 +130,10 @@
         <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(324 50 50)" />
         <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(342 50 50)" />
       </g>
-      <!-- doble anillo fino junto al hueco, como en la referencia -->
       <circle cx="50" cy="50" r="29.3" fill="none" stroke="rgba(225,240,255,0.65)" stroke-width="1.3" />
       <circle cx="50" cy="50" r="27.7" fill="none" stroke="rgba(10,25,55,0.5)" stroke-width="0.7" />
-      <!-- hueco central: queda abierto, sin relleno -->
     </g>
 
-    <!-- Engrane conector (mini): mismo estilo, menos dientes para verse limpio a tamaño pequeño -->
     <g id="gearMini">
       <circle cx="50" cy="50" r="28.5" fill="none" stroke="url(#cuerpo)" stroke-width="9" />
       <g fill="url(#diente)">
@@ -323,111 +165,42 @@
 
 <div class="subrayado"></div>
 
-<div class="cadena" id="cadena">
-  <!-- Las filas y conectores se generan desde JS -->
-</div>
+<div class="cadena" id="cadena"></div>
 
 <footer>✦ engranaje 2026</footer>
 
 <script>
-  /* ===== ARRAY CON LOS PROYECTOS REORGANIZADOS ===== */
   const secciones = [
-    {
-      cargo: "Secretaría General",
-      proyectos: [
-        { nombre: "Comunidad SUTERM", pdfUrl: "https://drive.google.com/file/d/12Rus2WrHdwO4dOzwlkAnjkDc3kY7SrdO/view?usp=drivesdk" }
-      ]
-    },
-    {
-      cargo: "Secretaría de Trabajo",
-      proyectos: [
-        { nombre: "2x1 2x2", pdfUrl: "https://drive.google.com/file/d/114QPNWxzzOw3eaSRpNZt5hSXDbT_6Hqi/view?usp=drivesdk" },
-        { nombre: "Bolsa de trabajo" },
-        { nombre: "Cláusula 43" }
-      ]
-    },
-    {
-      cargo: "Secretaría de Previsión Social",
-      proyectos: [
-        { nombre: "Menos es más", pdfUrl: "https://drive.google.com/file/d/1dwIMafbyddhj5JF21d-9rDbKCnMogiHW/view?usp=drivesdk" },
-        { nombre: "Ahora más es menos" }
-      ]
-    },
-    {
-      cargo: "Secretaría de Organización",
-      proyectos: [
-        { nombre: "Planeación de eventos" }
-      ]
-    },
-    {
-      cargo: "Secretaría del Interior",
-      proyectos: [
-        { nombre: "Inducción sobre estatutos" }
-      ]
-    },
-    {
-      cargo: "Secretaría de Finanzas",
-      proyectos: [
-        { nombre: "Gestión de préstamos" },
-        { nombre: "Laptops SUTERM" }
-      ]
-    },
-    {
-      cargo: "Secretaría de Relaciones",
-      proyectos: [
-        { nombre: "Alianzas intersindicales" },
-        { nombre: "Vinculación externa" }
-      ]
-    },
-    {
-      cargo: "Comisión de Justicia",
-      proyectos: [
-        { nombre: "Video grabación de audiencias" }
-      ]
-    }
+    { cargo: "Secretaría General", proyectos: [ { nombre: "Comunidad SUTERM", pdfUrl: "https://drive.google.com/file/d/12Rus2WrHdwO4dOzwlkAnjkDc3kY7SrdO/view?usp=drivesdk" } ] },
+    { cargo: "Secretaría de Trabajo", proyectos: [ { nombre: "2x1 2x2", pdfUrl: "https://drive.google.com/file/d/114QPNWxzzOw3eaSRpNZt5hSXDbT_6Hqi/view?usp=drivesdk" }, { nombre: "Bolsa de trabajo" }, { nombre: "Cláusula 43" } ] },
+    { cargo: "Secretaría de Previsión Social", proyectos: [ { nombre: "Menos es más", pdfUrl: "https://drive.google.com/file/d/1dwIMafbyddhj5JF21d-9rDbKCnMogiHW/view?usp=drivesdk" }, { nombre: "Ahora más es menos" } ] },
+    { cargo: "Secretaría de Organización", proyectos: [ { nombre: "Planeación de eventos" } ] },
+    { cargo: "Secretaría del Interior", proyectos: [ { nombre: "Inducción sobre estatutos" } ] },
+    { cargo: "Secretaría de Finanzas", proyectos: [ { nombre: "Gestión de préstamos" }, { nombre: "Laptops SUTERM" } ] },
+    { cargo: "Secretaría de Relaciones", proyectos: [ { nombre: "Alianzas intersindicales" }, { nombre: "Vinculación externa" } ] },
+    { cargo: "Comisión de Justicia", proyectos: [ { nombre: "Video grabación de audiencias" } ] }
   ];
 
   const cadena = document.getElementById('cadena');
-
   secciones.forEach((s, i) => {
     const fila = document.createElement('div');
     fila.className = 'fila';
-
     const colGear = document.createElement('div');
     colGear.className = 'col-gear';
-    colGear.innerHTML = `
-      <div class="gear-slot">
-        <svg viewBox="0 0 100 100"><use href="#gearDetallado"/></svg>
-      </div>
-      <div class="gear-label">${s.cargo}</div>
-    `;
-
+    colGear.innerHTML = `<div class="gear-slot"><svg viewBox="0 0 100 100"><use href="#gearDetallado"/></svg></div><div class="gear-label">${s.cargo}</div>`;
     const proyectos = document.createElement('div');
     proyectos.className = 'proyectos';
     proyectos.innerHTML = s.proyectos.map(p => {
-      /* Solo genera el botón si existe la propiedad pdfUrl */
       const linkHtml = p.pdfUrl ? `<a href="${p.pdfUrl}" target="_blank" class="pdf-link">📄 Documento</a>` : '';
-
-      return `
-        <div class="card">
-          ${p.nombre}
-          ${linkHtml}
-        </div>
-      `;
+      return `<div class="card">${p.nombre}${linkHtml}</div>`;
     }).join('');
-
-    fila.appendChild(colGear);
-    fila.appendChild(proyectos);
-    cadena.appendChild(fila);
-
-    if (i < secciones.length - 1){
-      const conector = document.createElement('div');
-      conector.className = 'conector';
+    fila.appendChild(colGear); fila.appendChild(proyectos); cadena.appendChild(fila);
+    if (i < secciones.length - 1) {
+      const conector = document.createElement('div'); conector.className = 'conector';
       conector.innerHTML = `<svg class="mini-gear" viewBox="0 0 100 100"><use href="#gearMini"/></svg>`;
       cadena.appendChild(conector);
     }
   });
 </script>
-
 </body>
 </html>
