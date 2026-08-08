@@ -32,15 +32,13 @@
   .cadena{ width:100%; max-width:760px; position:relative; }
   .cadena::before{
     content:''; position:absolute;
-    left:72px; /* Ajustado para que la línea siga centrada con el nuevo ancho de 145px */
-    top:60px; bottom:60px; width:2px;
+    left:72px; top:60px; bottom:60px; width:2px;
     background:linear-gradient(180deg, rgba(79,138,196,0) 0%, rgba(79,138,196,0.5) 8%, rgba(79,138,196,0.5) 92%, rgba(79,138,196,0) 100%);
     z-index:0;
   }
 
   .fila{ position:relative; display:flex; align-items:center; gap:26px; padding:22px 0; z-index:1; }
 
-  /* conector */
   .conector{ position:relative; height:38px; display:flex; align-items:center; padding-left:72px; z-index:1; }
   .conector .mini-gear{ width:30px; height:30px; transform:translateX(-15px); filter: drop-shadow(0 0 8px rgba(60,130,220,0.5)); animation: girarInverso 9s linear infinite; opacity:0.85; }
   @keyframes girarInverso{ from{ transform:translateX(-15px) rotate(360deg); } to{ transform:translateX(-15px) rotate(0deg); } }
@@ -51,17 +49,26 @@
   .fila:hover .gear-slot svg{ animation-play-state: paused; filter: drop-shadow(0 0 26px rgba(50,140,255,0.7)) drop-shadow(0 0 50px rgba(20,90,200,0.35)); }
   @keyframes girar{ to{ transform:rotate(360deg); } }
 
-  /* ===== Nombres de las Secretarías (TAMAÑO AUMENTADO) ===== */
+  /* ===== Nombres DENTRO del engrane (NUEVO) ===== */
+  .gear-name{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 0.75rem; /* Tamaño pequeño para que quepa en el hueco */
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.95);
+    pointer-events: none;
+    line-height: 1.1;
+    width: 50px; /* Limita el ancho para que no se salga del hueco */
+    z-index: 2;
+  }
+
+  /* ===== Nombres DEBAJO del engrane ===== */
   .gear-label{
-    margin-top:10px;
-    text-align:center;
-    font-size:1.2rem; 
-    font-weight:600;
-    letter-spacing:0.5px;
-    color:#bcd3ec;
-    line-height:1.2;
-    width:100%;
-    word-wrap: break-word; /* Evita que el texto se salga del contenedor */
+    margin-top:10px; text-align:center; font-size:1.2rem; font-weight:600; letter-spacing:0.5px;
+    color:#bcd3ec; line-height:1.2; width:100%; word-wrap: break-word;
   }
 
   .col-gear{ display:flex; flex-direction:column; align-items:center; width:145px; flex-shrink:0; }
@@ -87,12 +94,13 @@
     .gear-slot{ width:88px; height:88px; }
     h1{ font-size:1.5rem; }
     .gear-label{ font-size:1rem; }
+    .gear-name{ font-size:0.55rem; width: 35px; } /* Ajuste del nombre en móvil */
   }
 </style>
 </head>
 <body>
 
-<!-- ===== SVG de los engranes ===== -->
+<!-- ===== SVG CON 12 DIENTES (Principal) y 10 DIENTES (Mini) ===== -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <linearGradient id="diente" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -107,53 +115,41 @@
     </linearGradient>
 
     <g id="gearDetallado">
-      <circle cx="50" cy="50" r="31.5" fill="none" stroke="url(#cuerpo)" stroke-width="7" />
+      <circle cx="50" cy="50" r="31.5" fill="none" stroke="url(#cuerpo)" stroke-width="10" />
       <g fill="url(#diente)">
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(18 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(36 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(54 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(72 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(90 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(108 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(126 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(144 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(162 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(180 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(198 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(216 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(234 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(252 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(270 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(288 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(306 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(324 50 50)" />
-        <rect x="46.5" y="2.5" width="7" height="15" rx="1.6" transform="rotate(342 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(30 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(60 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(90 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(120 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(150 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(180 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(210 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(240 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(270 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(300 50 50)" />
+        <rect x="46" y="5" width="8" height="14" rx="2" transform="rotate(330 50 50)" />
       </g>
-      <circle cx="50" cy="50" r="29.3" fill="none" stroke="rgba(225,240,255,0.65)" stroke-width="1.3" />
-      <circle cx="50" cy="50" r="27.7" fill="none" stroke="rgba(10,25,55,0.5)" stroke-width="0.7" />
+      <circle cx="50" cy="50" r="24" fill="none" stroke="rgba(225,240,255,0.65)" stroke-width="1.3" />
+      <circle cx="50" cy="50" r="22.5" fill="none" stroke="rgba(10,25,55,0.5)" stroke-width="0.7" />
     </g>
 
     <g id="gearMini">
-      <circle cx="50" cy="50" r="28.5" fill="none" stroke="url(#cuerpo)" stroke-width="9" />
+      <circle cx="50" cy="50" r="28.5" fill="none" stroke="url(#cuerpo)" stroke-width="11" />
       <g fill="url(#diente)">
-        <rect x="45" y="1.5" width="10" height="17" rx="2" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(25.71 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(51.43 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(77.14 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(102.86 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(128.57 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(154.29 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(180 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(205.71 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(231.43 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(257.14 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(282.86 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(308.57 50 50)" />
-        <rect x="45" y="1.5" width="10" height="17" rx="2" transform="rotate(334.29 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(36 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(72 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(108 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(144 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(180 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(216 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(252 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(288 50 50)" />
+        <rect x="46" y="4" width="8" height="14" rx="2" transform="rotate(324 50 50)" />
       </g>
-      <circle cx="50" cy="50" r="25.5" fill="none" stroke="rgba(225,240,255,0.6)" stroke-width="1.4" />
-      <circle cx="50" cy="50" r="23.6" fill="none" stroke="rgba(10,25,55,0.5)" stroke-width="0.8" />
+      <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(225,240,255,0.6)" stroke-width="1.4" />
+      <circle cx="50" cy="50" r="18" fill="none" stroke="rgba(10,25,55,0.5)" stroke-width="0.8" />
     </g>
   </defs>
 </svg>
@@ -170,15 +166,16 @@
 <footer>✦ engranaje 2026</footer>
 
 <script>
+  /* ===== ARRAY CON LOS NOMBRES DENTRO DE LOS ENGRANES ===== */
   const secciones = [
-    { cargo: "Secretaría General", proyectos: [ { nombre: "Comunidad SUTERM", pdfUrl: "https://drive.google.com/file/d/12Rus2WrHdwO4dOzwlkAnjkDc3kY7SrdO/view?usp=drivesdk" } ] },
-    { cargo: "Secretaría de Trabajo", proyectos: [ { nombre: "2x1 2x2", pdfUrl: "https://drive.google.com/file/d/114QPNWxzzOw3eaSRpNZt5hSXDbT_6Hqi/view?usp=drivesdk" }, { nombre: "Bolsa de trabajo" }, { nombre: "Cláusula 43" } ] },
-    { cargo: "Secretaría de Previsión Social", proyectos: [ { nombre: "Menos es más", pdfUrl: "https://drive.google.com/file/d/1dwIMafbyddhj5JF21d-9rDbKCnMogiHW/view?usp=drivesdk" }, { nombre: "Ahora más es menos" } ] },
-    { cargo: "Secretaría de Organización", proyectos: [ { nombre: "Planeación de eventos" } ] },
-    { cargo: "Secretaría del Interior", proyectos: [ { nombre: "Inducción sobre estatutos" } ] },
-    { cargo: "Secretaría de Finanzas", proyectos: [ { nombre: "Gestión de préstamos" }, { nombre: "Laptops SUTERM" } ] },
-    { cargo: "Secretaría de Relaciones", proyectos: [ { nombre: "Alianzas intersindicales" }, { nombre: "Vinculación externa" } ] },
-    { cargo: "Comisión de Justicia", proyectos: [ { nombre: "Video grabación de audiencias" } ] }
+    { cargo: "Secretaría General", nombre: "Yrak", proyectos: [ { nombre: "Comunidad SUTERM", pdfUrl: "https://drive.google.com/file/d/12Rus2WrHdwO4dOzwlkAnjkDc3kY7SrdO/view?usp=drivesdk" } ] },
+    { cargo: "Secretaría de Trabajo", nombre: "Amado", proyectos: [ { nombre: "2x1 2x2", pdfUrl: "https://drive.google.com/file/d/114QPNWxzzOw3eaSRpNZt5hSXDbT_6Hqi/view?usp=drivesdk" }, { nombre: "Bolsa de trabajo" }, { nombre: "Cláusula 43" } ] },
+    { cargo: "Secretaría de Previsión Social", nombre: "Silvia", proyectos: [ { nombre: "Menos es más", pdfUrl: "https://drive.google.com/file/d/1dwIMafbyddhj5JF21d-9rDbKCnMogiHW/view?usp=drivesdk" }, { nombre: "Ahora más es menos" } ] },
+    { cargo: "Secretaría de Organización", nombre: "...", proyectos: [ { nombre: "Planeación de eventos" } ] },
+    { cargo: "Secretaría del Interior", nombre: "...", proyectos: [ { nombre: "Inducción sobre estatutos" } ] },
+    { cargo: "Secretaría de Finanzas", nombre: "...", proyectos: [ { nombre: "Gestión de préstamos" }, { nombre: "Laptops SUTERM" } ] },
+    { cargo: "Secretaría de Relaciones", nombre: "...", proyectos: [ { nombre: "Alianzas intersindicales" }, { nombre: "Vinculación externa" } ] },
+    { cargo: "Comisión de Justicia", nombre: "...", proyectos: [ { nombre: "Video grabación de audiencias" } ] }
   ];
 
   const cadena = document.getElementById('cadena');
@@ -187,7 +184,13 @@
     fila.className = 'fila';
     const colGear = document.createElement('div');
     colGear.className = 'col-gear';
-    colGear.innerHTML = `<div class="gear-slot"><svg viewBox="0 0 100 100"><use href="#gearDetallado"/></svg></div><div class="gear-label">${s.cargo}</div>`;
+    colGear.innerHTML = `
+      <div class="gear-slot">
+        <svg viewBox="0 0 100 100"><use href="#gearDetallado"/></svg>
+        <div class="gear-name">${s.nombre}</div>
+      </div>
+      <div class="gear-label">${s.cargo}</div>
+    `;
     const proyectos = document.createElement('div');
     proyectos.className = 'proyectos';
     proyectos.innerHTML = s.proyectos.map(p => {
